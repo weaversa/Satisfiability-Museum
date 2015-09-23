@@ -1,0 +1,191 @@
+                     Road Map of the Source Files
+
+
+ballbin.c:
+ballbin.h:
+    Generates instances of the balls-in-bins problem, i.e., the
+    pigeonhole problem.
+
+bt-stack.c:
+bt-stack.h:
+    Contains code for the search algorithm's backtracking stack (pushing,
+    popping, etc.).
+
+cmn-carr.c:
+cmn-carr.h:
+    Describes and supports the portion of the second problem
+    representation which involves information about clauses that does
+    not change during the search algorithm.
+
+cmn-flgs.c:
+cmn-flgs.h:
+    Defines the flag algorithm_choice, which is currently unused.
+
+cmn-parr.c:
+cmn-parr.h:
+    Describes and supports the portion of the second problem
+    representation which involves information about propositions that
+    does not change during the search algorithm.
+
+cmn-sv.c:
+cmn-sv.h:
+    Contains common_sv_make(), which constructs the portion of the
+    second problem representation which does not change during the
+    search algorithm.
+
+cnfforms.c:
+cnfforms.h:
+    Defines the initial representation of SAT problems and contains
+    some low-level routines to help construct them.  This representation
+    is useful for generating SAT problems but not for solving them.
+
+defines.h:
+    Only needed for compilers that can't use Makefiles, e.g., Think C.
+
+dimacs.c:
+dimacs.h:
+    Contains get_dimacs_formula(), a parser for DIMACS encodings of SAT
+    problems.
+
+dmcs-cnf.c:
+dmcs-cnf.h:
+    A parser for the DIMACS .cnf encoding.
+
+dmcs-sat.c:
+dmcs-sat.h:
+    A parser for the DIMACS .sat encoding.
+
+dynamic.c:
+dynamic.h:
+    Contains satisfy_dynamic(), the high-level backtracking search
+    algorithm.
+
+dynstats.c:
+dynstats.h:
+    Contains global_status_report(), which prints out the results
+    of the search algorithm in a machine-dependent or machine-
+    independent way.
+
+gbl-carr.c:
+gbl-carr.h:
+    Describes and supports the portion of the second problem
+    representation which involves information about clauses that
+    changes during the search algorithm.
+
+gbl-parr.c:
+gbl-parr.h:
+    Describes and supports the portion of the second problem
+    representation which involves information about propositions that
+    changes during the search algorithm.
+
+gbl-sv.c:
+gbl-sv.h:
+    Contains three important routines:  global_sv_make(), which
+    constructs the portion of the second problem representation that
+    changes during the search algorithm; extend_prop_la(), which
+    assigns a truth value to an open proposition and then runs unit
+    resolution; and extend_prop_la_for_failure(), which does the same
+    thing without changing any of the main data structures, i.e., it
+    checks whether satisfying a literal and then running unit
+    resolution falsifies the formula.
+
+good-rnd.c:
+good-rnd.h:
+    Contains two random number generators from _Numerical Recipes in C_:
+    a slower, more accurate generator for creating random formulas, and
+    a faster, slightly less accurate generator for use within the search
+    algorithm.
+
+graphclr.c:
+graphclr.h:
+    Generates instances of random graph coloring problems.
+
+heur1.c:
+heur1.h:
+    Contains heuristic1_nonbinary(), a simple heuristic which is only
+    called when the formula does not contain any open binary clauses.
+
+heur2.c:
+heur2.h:
+    Contains heuristic2a(), a slow, powerful heuristic which is only
+    run on the most promising candidates at each node of the search
+    tree.
+
+heurs.c:
+heurs.h:
+    Contains apply_heuristic(), which finds the next literal for the
+    search algorithm to branch on.
+
+k-lits.c:
+k-lits.h:
+    Contains simplify_formula(), which simplifies a given SAT problem
+    using several different techniques before the backtracking search
+    begins.
+
+la-stack.c:
+la-stack.h:
+    Contains routines to support a stack which is used when performing
+    unit resolution within the search algorithm.
+
+m-n-reg.c:
+m-n-reg.h:
+    Generates instances of M-N-regular random K-SAT problems (due to
+    Pehoushek).
+
+main.c:
+main.h:
+    Reads in environment variables, parses command-line options, and
+    calls the top-level routines.
+
+misc.c:
+misc.h:
+    Contains save_state(), which is just an extremely fast version of
+    memcpy().
+
+n-queens.c:
+n-queens.h:
+    Generates instances of the N-queens problem.  These formulas
+    quickly become too large to be useful.
+
+poly.c:
+poly.h:
+    Contains append_to_array(), which appends a new element onto the
+    end of the array, reallocating space for the array if necessary.
+
+prims.h:
+    Fundamental definitions (truth variables, literal signs, etc.).
+
+readdata.c:
+readdata.h:
+    Contains read_long(), read_double(), and read_string(), which
+    read in data from stdin in a fairly robust way.
+
+rnd-ksat.c:
+rnd-ksat.h:
+    Generates instances of random K-SAT problems.
+
+safemall.c:
+safemall.h:
+    Contains slightly better versions of malloc() and free(), as well
+    as fatal_error() for reporting an error condition and exiting.
+
+smallarr.c:
+smallarr.h:
+    Supports a specific data type:  small arrays that hold entries
+    sorted in decreasing order with respect to a given cost.
+
+statebas.c:
+statebas.h:
+    Contains code for the representation of basic entities, i.e.,
+    literals and clauses.
+
+statevec.c:
+statevec.h:
+    Contains sv_make_and_preprocess(), which constructs the second
+    SAT problem representation from the first one and then tries to
+    apply a few trivial simplifications.
+
+timeiset.c:
+timeiset.h:
+    Supports a specific data type:  finite sets with indexed elements,
+    where the range of the possible indices is known in advance.

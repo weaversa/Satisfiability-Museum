@@ -1,0 +1,61 @@
+1.  Introduction
+
+This is the README file for POSIT, the PrOpositional SatIsfiability
+Testbed.  You need an ANSI C compiler to build POSIT.  It has been
+tested on a Sun SPARCStation, an IBM RS6000, and an Apple Macintosh,
+and should work on most 32-bit Unix platforms.
+
+2.  Building and Installing POSIT
+
+To build POSIT, edit the top portion of the Makefile in the
+appropriate way and then type "make".  If you can't use the Makefile
+(e.g., if you are using Think C on the Macintosh), then edit the file
+defines.h before compiling POSIT.
+
+To install POSIT, simply move the executable to the desired directory.
+There is no "make install" target.
+
+3.  Using POSIT
+
+You can modify POSIT's behavior in one of three ways: interactively;
+on the command line; or through environment variables.  To use the
+first method, simply type "posit" with no arguments.  To see a list of
+POSIT's command line options, type "posit help" or "posit foobar" or
+anything else that it doesn't understand.  To see a list of its
+environment variables, look through the file doc/posit.cshrc.
+
+4.  For More Information
+
+The file src/ROAD_MAP provides a brief description of each file in the
+src subdirectory.  The doc subdirectory contains some sample problems,
+a man page that describes POSIT's interface more precisely, and a
+LaTeX file that describes the DIMACS standard input and output formats
+for satisfiability problems.  The scripts subdirectory contains some
+shell scripts and a small C program that might be helpful to more
+dedicated users.
+
+5.  Support
+
+Send all questions, bug reports, and requests to me,
+freeman@gradient.cis.upenn.edu .  Bug reports should contain as much
+information as possible, including type of platform, name and version
+of operating system, name and version of compiler, compilation flags,
+POSIT's version number, and a transcript or a description of its
+behavior.
+
+6.  Your Rights and Responsibilities
+
+As its name implies, POSIT is intended to serve as a testbed for
+research into satisfiability testing.  Thus you have the right to use
+all or part of the source code and modify it as you deem necessary.
+However, you must not remove the copyright notices from the top of the
+source files, you must not claim that you have written any of the code
+yourself, and if you include all or part of it in another program, you
+must acknowledge that you have done so somewhere in that program's
+documentation.
+
+7.  Lack of Warranty
+
+Important: This program is distributed in the hope that it will be
+useful, but WITHOUT ANY WARRANTY, EXPRESS OR IMPLIED, INCLUDING THOSE
+OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.

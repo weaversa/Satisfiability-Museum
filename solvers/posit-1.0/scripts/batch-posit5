@@ -1,0 +1,55 @@
+#!/opt/bin/tcsh
+
+# This script runs POSIT on a wide range of hard random 5-SAT problems.
+
+set RESULTDIR = /tmp/results-hard5sat
+set POSIT = /tmp/posit
+
+setenv POSIT_RANDOMKSAT_CLAUSELENGTH 5
+
+echo "10 variables..."
+setenv POSIT_RANDOMKSAT_PROPCOUNT   10
+setenv POSIT_RANDOMKSAT_CLAUSECOUNT 211
+$POSIT -g 1 -n 1000 -fs $RESULTDIR/posit.stats.5.10
+
+echo "20 variables..."
+setenv POSIT_RANDOMKSAT_PROPCOUNT   20
+setenv POSIT_RANDOMKSAT_CLAUSECOUNT 421
+$POSIT -g 1 -n 1000 -fs $RESULTDIR/posit.stats.5.20
+
+echo "30 variables..."
+setenv POSIT_RANDOMKSAT_PROPCOUNT   30
+setenv POSIT_RANDOMKSAT_CLAUSECOUNT 632
+$POSIT -g 1 -n 1000 -fs $RESULTDIR/posit.stats.5.30
+
+echo "40 variables..."
+setenv POSIT_RANDOMKSAT_PROPCOUNT   40
+setenv POSIT_RANDOMKSAT_CLAUSECOUNT 842
+$POSIT -g 1 -n 1000 -fs $RESULTDIR/posit.stats.5.40
+
+echo "50 variables..."
+setenv POSIT_RANDOMKSAT_PROPCOUNT   50
+setenv POSIT_RANDOMKSAT_CLAUSECOUNT 1053
+$POSIT -g 1 -n 1000 -fs $RESULTDIR/posit.stats.5.50
+
+echo "60 variables..."
+setenv POSIT_RANDOMKSAT_PROPCOUNT   60
+setenv POSIT_RANDOMKSAT_CLAUSECOUNT 1263
+$POSIT -g 1 -n 1000 -fs $RESULTDIR/posit.stats.5.60
+
+echo "70 variables..."
+setenv POSIT_RANDOMKSAT_PROPCOUNT   70
+setenv POSIT_RANDOMKSAT_CLAUSECOUNT 1474
+$POSIT -g 1 -n 500 -fs $RESULTDIR/posit.stats.5.70
+
+echo "80 variables..."
+setenv POSIT_RANDOMKSAT_PROPCOUNT   80
+setenv POSIT_RANDOMKSAT_CLAUSECOUNT 1684
+$POSIT -g 1 -n 250 -fs $RESULTDIR/posit.stats.5.80
+
+echo "90 variables..."
+setenv POSIT_RANDOMKSAT_PROPCOUNT   90
+setenv POSIT_RANDOMKSAT_CLAUSECOUNT 1895
+$POSIT -g 1 -n 100 -fs $RESULTDIR/posit.stats.5.90
+
+echo "Done."

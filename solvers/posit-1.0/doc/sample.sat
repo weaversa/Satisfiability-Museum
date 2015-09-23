@@ -1,0 +1,9 @@
+c Example SAT format file in DIMACS format
+c It contains a formula in cnf formulation.
+c
+c
+p sat 4
+(*(+( 2 3- (( 4  )  ) )
++( -4 )
++( 2 3 4 )
+))

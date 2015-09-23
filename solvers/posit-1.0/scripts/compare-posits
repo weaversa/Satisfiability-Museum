@@ -1,0 +1,44 @@
+#!/opt/bin/tcsh
+
+# Repeatedly run two versions of POSIT on the same randomly-generated
+# problem, checking for inconsistencies.  Typically, one of these
+# versions has sophisticated features turned on and the other doesn't.
+
+set NICE = nice
+@ COUNT = 1000                       # The number of trials to run.
+set POSIT1 = /tmp/good-posit
+set POSIT2 = /tmp/bad-posit
+set LOGFILE1 = /tmp/posit.log1
+set LOGFILE2 = /tmp/posit.log2
+set ERRFILE1 = /tmp/posit.err1
+set ERRFILE2 = /tmp/posit.err2
+set BUGFILE = /tmp/posit.bug
+setenv SUCCESS
+
+# The parameters for POSIT.
+
+setenv POSIT_RANDOMKSAT_PROPCOUNT    50
+setenv POSIT_RANDOMKSAT_CLAUSECOUNT  218
+setenv POSIT_RANDOMKSAT_CLAUSELENGTH 3
+
+/bin/rm -f $BUGFILE
+while ( $COUNT > 0 )	
+	echo $COUNT
+	/bin/rm -f $LOGFILE1 $LOGFILE2 $ERRFILE1 $ERRFILE2
+	$NICE $POSIT1 -g 1 -e -fl $LOGFILE1 -fe $ERRFILE1
+	set STRING1 = `/usr/ucb/head -1 $LOGFILE1`
+	$NICE $POSIT2 -f $ERRFILE1 -fl $LOGFILE2 -fe $ERRFILE2
+	set STRING2 = `/usr/ucb/head -1 $LOGFILE2`
+	if ( "$STRING1" != "$STRING2" ) then
+		echo "Inconsistency detected."
+		cp $ERRFILE1 $BUGFILE
+		unsetenv SUCCESS
+		break
+	endif
+	@ COUNT--
+end
+
+if ( $?SUCCESS ) then
+	echo "Completed successfully."
+	/bin/rm -f $LOGFILE1 $LOGFILE2 $ERRFILE1 $ERRFILE2 $BUGFILE
+endif

@@ -1,0 +1,70 @@
+#!/opt/bin/tcsh
+
+# This script runs POSIT on a wide range of hard random 4-SAT problems.
+
+set RESULTDIR = /tmp/results-hard4sat
+set POSIT = /tmp/posit
+
+setenv POSIT_RANDOMKSAT_CLAUSELENGTH 4
+
+echo "10 variables..."
+setenv POSIT_RANDOMKSAT_PROPCOUNT   10
+setenv POSIT_RANDOMKSAT_CLAUSECOUNT 99
+$POSIT -g 1 -n 1000 -fs $RESULTDIR/posit.stats.4.10
+
+echo "20 variables..."
+setenv POSIT_RANDOMKSAT_PROPCOUNT   20
+setenv POSIT_RANDOMKSAT_CLAUSECOUNT 198
+$POSIT -g 1 -n 1000 -fs $RESULTDIR/posit.stats.4.20
+
+echo "30 variables..."
+setenv POSIT_RANDOMKSAT_PROPCOUNT   30
+setenv POSIT_RANDOMKSAT_CLAUSECOUNT 296
+$POSIT -g 1 -n 1000 -fs $RESULTDIR/posit.stats.4.30
+
+echo "40 variables..."
+setenv POSIT_RANDOMKSAT_PROPCOUNT   40
+setenv POSIT_RANDOMKSAT_CLAUSECOUNT 395
+$POSIT -g 1 -n 1000 -fs $RESULTDIR/posit.stats.4.40
+
+echo "50 variables..."
+setenv POSIT_RANDOMKSAT_PROPCOUNT   50
+setenv POSIT_RANDOMKSAT_CLAUSECOUNT 494
+$POSIT -g 1 -n 1000 -fs $RESULTDIR/posit.stats.4.50
+
+echo "60 variables..."
+setenv POSIT_RANDOMKSAT_PROPCOUNT   60
+setenv POSIT_RANDOMKSAT_CLAUSECOUNT 593
+$POSIT -g 1 -n 1000 -fs $RESULTDIR/posit.stats.4.60
+
+echo "70 variables..."
+setenv POSIT_RANDOMKSAT_PROPCOUNT   70
+setenv POSIT_RANDOMKSAT_CLAUSECOUNT 692
+$POSIT -g 1 -n 1000 -fs $RESULTDIR/posit.stats.4.70
+
+echo "80 variables..."
+setenv POSIT_RANDOMKSAT_PROPCOUNT   80
+setenv POSIT_RANDOMKSAT_CLAUSECOUNT 790
+$POSIT -g 1 -n 1000 -fs $RESULTDIR/posit.stats.4.80
+
+echo "90 variables..."
+setenv POSIT_RANDOMKSAT_PROPCOUNT   90
+setenv POSIT_RANDOMKSAT_CLAUSECOUNT 889
+$POSIT -g 1 -n 1000 -fs $RESULTDIR/posit.stats.4.90
+
+echo "100 variables..."
+setenv POSIT_RANDOMKSAT_PROPCOUNT   100
+setenv POSIT_RANDOMKSAT_CLAUSECOUNT 988
+$POSIT -g 1 -n 1000 -fs $RESULTDIR/posit.stats.4.100
+
+echo "125 variables..."
+setenv POSIT_RANDOMKSAT_PROPCOUNT   125
+setenv POSIT_RANDOMKSAT_CLAUSECOUNT 1235
+$POSIT -g 1 -n 1000 -fs $RESULTDIR/posit.stats.4.125
+
+echo "150 variables..."
+setenv POSIT_RANDOMKSAT_PROPCOUNT   150
+setenv POSIT_RANDOMKSAT_CLAUSECOUNT 1482
+$POSIT -g 1 -n 500 -fs $RESULTDIR/posit.stats.4.150
+
+echo "Done."

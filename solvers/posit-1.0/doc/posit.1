@@ -1,0 +1,232 @@
+.\" @(#)posit.1
+.TH POSIT 1 "30 April 1994"
+.SH NAME
+posit \- CNF satisfiability tester
+.SH SYNOPSIS
+.B posit
+[
+.B \-
+|
+.B \-f
+.I problem\-file
+|
+.B \-g
+.I problem\-type
+]
+[
+.B \-n
+.I trials
+]
+[
+.B \-r
+.I seed
+]
+[
+.B \-e
+]
+[
+.B \-eo
+]
+[
+.B \-fe
+.I error\-file
+]
+[
+.B \-fl
+.I log\-file
+]
+[
+.B \-fs
+.I statistics\-file
+]
+[
+.B \-m
+]
+.br
+.B posit
+[
+.B \-v
+]
+.SH DESCRIPTION
+POSIT, for PrOpositional SatIsfiability Testbed, is a utility that finds
+exact solutions to the NP\-complete satisfiability problem (SAT), which
+is to determine whether there exists a satisfying truth assignment
+for a Boolean formula in conjunctive normal form (and to return such an
+assignment if one does exist).
+POSIT is a highly optimized version of the Davis\-Putnam procedure
+in Loveland's form.
+.LP
+POSIT can internally generate several kinds of SAT problems.  All other
+problems must be encoded in one of two formats suggested by the
+organizing committee of the Second DIMACS Implementation Challenge.
+POSIT can also output solutions in a DIMACS\-compatible format.
+.LP
+For convenience, most of the command\-line options can also be
+specified using environment variables.  In case of a conflict,
+command\-line options take precedence.  When started with no options,
+POSIT prompts the user to specify a problem, unless of course the
+appropriate environment variables have already been set.
+.SH OPTIONS
+.TP
+.B \-
+Read the input problem from stdin.
+.TP
+.BI \-f " problem-file"
+Read the input problem from
+.I problem-file.
+.TP
+.BI \-g " problem-type"
+Specify the type of an internally generated problem.
+.I problem-type
+is a number from 1 to 5 that corresponds to one of the following
+five problems:
+1) Random K\-SAT problems (Mitchell et al.);
+2) random M\-N\-regular K\-SAT problems (Pehoushek);
+3) random graph\-coloring problems;
+4) N\-queens problems; and
+5) balls in bins problems, a.k.a. pigeonhole problems.
+.TP
+.BI \-n " trials"
+Solve a total of
+.I trials
+problems.
+The default value is 1.
+A single external problem from a file is solved repeatedly.
+A single external problem from a pipe is not.
+.TP
+.BI \-r " seed"
+Set the random number seed to
+.I seed,
+which can be any number other than zero.
+Zero or no value sets it to the sum of the process's ID number
+and the number of seconds since January 1, 1970.
+This option is useful for repeating an experiment on internally
+generated random problems.
+.TP
+.B \-e
+Echo the given problem(s) to stderr.
+.TP
+.B \-eo
+Echo only; do not solve the given problem(s).
+.TP
+.BI \-fe " error-file"
+Redirect stderr to
+.I error-file.
+Not terribly useful.
+.TP
+.BI \-fl " log-file"
+Redirect stdout to
+.I log-file.
+Useful because the program can sometimes be interactive.
+.TP
+.BI \-fs " statistics-file"
+Save statistics (result, search tree size, and elapsed CPU time) in
+.I statistics-file.
+.TP
+.B \-m
+Output the solution(s) in a DIMACS-compatible machine-readable format.
+.TP
+.B \-v
+Print the version number and exit.  Overrides all other options.
+.SH ENVIRONMENT
+.TP
+.B POSIT_PROBLEM_CHOICE
+Equivalent to the "\-g" option.
+Must be one of the following:  "nqueens",
+"mitchellksat", "graphcoloring", "mnregular", "ballsinbins",
+"stdin", or "file".  No default.
+.TP
+.B POSIT_ECHO_INTERNAL_PROBLEMS
+Equivalent to the "\-e" option.
+.TP
+.B POSIT_MACHINE_READABLE_OUTPUT
+Equivalent to the "\-m" option.
+.TP
+.B POSIT_RANDOM_SEED
+Equivalent to the "\-r" option.
+.TP
+.B POSIT_NUMBER_OF_TRIALS
+Equivalent to the "\-n" option.
+.LP
+The following environment variables are problem\-specific.
+Most of them must be positive integers.  None of them
+have default values.
+.TP
+.B POSIT_NQUEENS_QUEENCOUNT
+Specific to n-queens problems.
+.LP
+.PD 0
+.TP
+.B POSIT_GRAPHCOLOR_VERTEXCOUNT
+.TP
+.B POSIT_GRAPHCOLOR_EDGE_PROB
+.TP
+.B POSIT_GRAPHCOLOR_COLORCOUNT
+Specific to random graph\-coloring problems.  The second variable
+must be between 0 and 1, inclusive.
+.PD
+.LP
+.PD 0
+.TP
+.B POSIT_RANDOMKSAT_PROPCOUNT
+.TP
+.B POSIT_RANDOMKSAT_CLAUSECOUNT
+.TP
+.B POSIT_RANDOMKSAT_CLAUSELENGTH
+Specific to random K\-SAT problems (Mitchell et al.).
+.PD
+.LP
+.PD 0
+.TP
+.B POSIT_MNREGULAR_POSOCCURRENCES
+.TP
+.B POSIT_MNREGULAR_NEGOCCURRENCES
+.TP
+.B POSIT_MNREGULAR_PROPCOUNT
+.TP
+.B POSIT_MNREGULAR_CLAUSELENGTH
+Specific to M\-N\-regular random K\-SAT problems (Pehoushek).
+The sum of the first two numbers, times the third, must be evenly
+divisible by the fourth.
+.PD
+.LP
+.PD 0
+.TP
+.B POSIT_BALLSINBINS_BALLCOUNT
+.TP
+.B POSIT_BALLSINBINS_BINCOUNT
+Specific to balls\-in\-bins problems, a.k.a. pigeonhole problems.
+.PD
+.SH FILES
+.PD 0
+.TP 15
+.B file.cnf
+Input file in DIMACS "cnf" format
+.TP
+.B file.sat
+Input file in DIMACS "sat" format
+.PD
+.SH "SEE ALSO"
+Jon W. Freeman,
+.I Improvements to Propositional Satisfiability Search Algorithms.
+Ph.D. thesis, University of Pennsylvania, Philadelphia,
+Pennsylvania, May 1995.
+.SH BUGS
+On most platforms, clauses cannot contain more than 127 literals,
+and no literal can appear in more than 255 clauses of length 2
+at any time during the program's execution.
+.LP
+POSIT is not capable of finding
+.I all
+of the satisfying truth assignments for a given problem.
+.LP
+POSIT takes exponential time in the worst case.  This is unlikely to
+change.
+.SH COPYRIGHT
+Copyright (c) 1994 by Jon Freeman.
+.SH AUTHORS
+Jon W. Freeman, Department of Computer and Information Science,
+University of Pennsylvania.
+.LP
+Philip C. Jackson, Jr., Computer Science Department,
+Wayne State University (Macintosh port).
